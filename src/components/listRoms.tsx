@@ -23,21 +23,20 @@ const ListRooms = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // جلب البيانات من الـ API
   const fetchRooms = async () => {
     try {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwYzI1MzRiLTc5YjAtNDJiYy05YzAwLWZmMTdiMjViY2Y5ZiIsImVtYWlsIjoiYWxpQGdtYWlsLmNvbSIsImlhdCI6MTc0MDkxNzQzMiwiZXhwIjoxNzQwOTIxMDMyfQ.FnwlkzdZ8EZVUQCmTyuwJ9o8Bx3Ncn_ZD6pyqB0Y-nk"
+      const token = localStorage.getItem("token")
       setLoading(true);
       const response = await fetch(API_URL,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
-        }// إرسال التوكن هنا
+        }
         });
       if (!response.ok) throw new Error("Failed to fetch rooms");
 
-      const data: Room[] = await response.json(); // التأكد من أن البيانات تعود بصيغة Room[]
+      const data: Room[] = await response.json();
       setRooms(data);
       setFilteredRooms(data);
       setError("");
