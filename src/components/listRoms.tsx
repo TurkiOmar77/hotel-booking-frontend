@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const API_URL = "https://backend-booking-vyhe.onrender.com/api/rooms/";
+const API_URL_ROOMS = process.env.NEXT_PUBLIC_API_URL + "rooms";
 
-// تعريف نوع الغرفة
+
 interface Room {
   number: number;
   type: string;
@@ -23,26 +23,26 @@ const ListRooms = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // جلب البيانات من الـ API
+
   const fetchRooms = async () => {
     try {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwYzI1MzRiLTc5YjAtNDJiYy05YzAwLWZmMTdiMjViY2Y5ZiIsImVtYWlsIjoiYWxpQGdtYWlsLmNvbSIsImlhdCI6MTc0MDkxNzQzMiwiZXhwIjoxNzQwOTIxMDMyfQ.FnwlkzdZ8EZVUQCmTyuwJ9o8Bx3Ncn_ZD6pyqB0Y-nk"
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwYzI1MzRiLTc5YjAtNDJiYy05YzAwLWZmMTdiMjViY2Y5ZiIsImVtYWlsIjoiYWxpQGdtYWlsLmNvbSIsImlhdCI6MTc0MTAwMDYzMSwiZXhwIjoxNzQxMDA0MjMxfQ.jmxKfcBwtxFxj0e-Ogo9-AaaG2ijl8QaERDc1ryGTUE"
       setLoading(true);
-      const response = await fetch(API_URL,{
+      const response = await fetch(API_URL_ROOMS, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
-        }// إرسال التوكن هنا
-        });
+          "Authorization": `Bearer ${token}`
+        }
+      });
       if (!response.ok) throw new Error("Failed to fetch rooms");
 
-      const data: Room[] = await response.json(); // التأكد من أن البيانات تعود بصيغة Room[]
+      const data: Room[] = await response.json();
       setRooms(data);
       setFilteredRooms(data);
       setError("");
-    } catch (err:any) {
-      
+    } catch (err: any) {
+
       setError(`Error fetching rooms. Please try again. `);
     } finally {
       setLoading(false);
