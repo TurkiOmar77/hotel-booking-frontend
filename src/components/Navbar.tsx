@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import LogoutButton from "./logout";
-import { Menu, X } from "lucide-react"; 
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function Navbar() {
           <span className="text-xl font-semibold text-green-700 cursor-pointer">My Hotel</span>
         </Link>
 
-      
+
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -25,7 +25,6 @@ export default function Navbar() {
 
         <div className="hidden lg:flex space-x-6 ">
           <Link href="/" className="text-gray-700 hover:text-green-600 transition">Home</Link>
-          <Link href="/create" className="text-gray-700 hover:text-green-600 transition">Add New Booking</Link>
         </div>
         <div className="hidden lg:flex"><LogoutButton /></div>
 
@@ -34,9 +33,8 @@ export default function Navbar() {
       {menuOpen && (
         <div className="lg:hidden bg-white border-t mt-3 py-4 space-y-3 flex flex-col text-center">
           <Link href="/" className="text-gray-700 hover:text-blue-600 transition" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/create" className="text-gray-700 hover:text-blue-600 transition" onClick={() => setMenuOpen(false)}>Add New Post</Link>
           <div className="border-t pt-3">
-            <LogoutButton /> 
+            <LogoutButton />
           </div>
         </div>
       )}
