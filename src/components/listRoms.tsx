@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation";
 const API_URL_ROOMS = process.env.NEXT_PUBLIC_API_URL + "rooms";
 
 
@@ -22,7 +22,7 @@ const ListRooms = () => {
   const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const Router = useRouter()
   const fetchRooms = async () => {
     try {
       const token = localStorage.getItem("token")
@@ -31,9 +31,9 @@ const ListRooms = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${token}`
         }
-        });
+      });
       if (!response.ok) throw new Error("Failed to fetch rooms");
 
       const data: Room[] = await response.json();
@@ -49,6 +49,12 @@ const ListRooms = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      setError("You must be logged in to view rooms");
+      Router.push("/login")
+      return;
+    }
     fetchRooms();
   }, []);
 
