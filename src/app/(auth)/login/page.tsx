@@ -38,6 +38,7 @@ const LoginPage = () => {
           localStorage.setItem("userId", data.userId);
           router.push("/");
         }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message);
         console.error("JSON Parsing Error:", err);

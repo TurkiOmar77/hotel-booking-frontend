@@ -35,6 +35,7 @@ const ListRooms = () => {
       setRooms(roomsData);
       setBookings(bookingsData);
       setError("");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Error fetching data. Please try again.");
     } finally {
@@ -62,6 +63,7 @@ const ListRooms = () => {
       await createBooking(roomId, currentUserId, checkIn, checkOut, token);
       alert(`Booking Successfully`);
       fetchData();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.message || "Error booking room. Please try again.");
     }
@@ -76,6 +78,7 @@ const ListRooms = () => {
       await deleteBooking(bookingId, token);
       alert("Booking canceled successfully");
       fetchData();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.message || "Error canceling booking. Please try again.");
     }
