@@ -9,14 +9,14 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
+  const API_LOGIN = process.env.NEXT_PUBLIC_API_URL + "user/login"
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const response = await fetch("https://hotel-booking-mj9x.onrender.com/api/user/login", {
+      const response = await fetch(API_LOGIN, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,9 +33,10 @@ const LoginPage = () => {
           setError(data.message || "Error login res");
         } else {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.userId);
           router.push("/");
         }
-      } catch (err:any) {
+      } catch (err: any) {
         setError(err.message);
         console.error("JSON Parsing Error:", err);
       }
@@ -76,7 +77,7 @@ const LoginPage = () => {
           className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
           disabled={loading}
         >
-          {loading ? "جاري التحميل..." : "Login"}
+          {loading ? "Loading.." : "Login"}
         </button>
       </form>
     </div>
