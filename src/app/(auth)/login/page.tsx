@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -74,12 +76,16 @@ const LoginPage = () => {
         {error && <p className="text-red-500 my-2">{error}</p>}
         <button
           type="submit"
-          className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
+          className="mb-4 bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
           disabled={loading}
         >
           {loading ? "Loading.." : "Login"}
         </button>
+        <Link href={"/signup"}>
+          <span className="text-green-800 hover:underline ">signup</span>
+        </Link>
       </form>
+
     </div>
   );
 };

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -81,11 +83,14 @@ const RegisterPage = () => {
         {error && <p className="text-red-500 my-2">{error}</p>}
         <button
           type="submit"
-          className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
+          className="mb-4 bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
           disabled={loading}
         >
           {loading ? "Processing..." : "Register"}
         </button>
+        <Link href={"/login"}>
+          <span className="text-green-800 hover:underline  ">login</span>
+        </Link>
       </form>
     </div>
   );
